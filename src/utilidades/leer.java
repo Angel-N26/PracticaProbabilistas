@@ -3,7 +3,7 @@ package utilidades;
 import java.util.*;
 
 /** Clase para poder leer del teclado cualquier dato del tipo que sea de los siguientes:
- * Entero, Double, Float, Cadena, Car�cter, Boolean * 
+ * Entero, Double, Float, Cadena, Caracter, Boolean * 
  **/
 
 public class leer {
@@ -59,8 +59,8 @@ public class leer {
             vale = true;
             p(s);
             try {
-                res = TECLADO.nextInt();
-                //p(res+"");
+                res = TECLADO.nextDouble();
+                //p(res +"");
             } catch (Exception e) {
                 vale = false;
                 TECLADO.next();
