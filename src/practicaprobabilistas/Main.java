@@ -28,7 +28,7 @@ public class Main {
                 case 2:
                     PracticaProbabilistas pe = new PracticaProbabilistas(leer.real("radio:\n"),leer.real("xP:\n"),leer.real("yP:\n"),leer.real("zP:\n"));
                     k = leer.entero("Numero de veces: ");
-                    leer.pln("Volumen: " + pe.volumen(k));
+                    leer.pln("Volumen: " + pe.volumenEsfera(k)+ " Intervalo de confianza[" + pe.getIntConfPos(0) + " , " + pe.getIntConfPos(1) + "]");
                     break;
 
                 case 3:
@@ -37,7 +37,6 @@ public class Main {
 
                 default:
                     leer.pln("Opcion invalida");
-
             }
 
         } while (seguir);
