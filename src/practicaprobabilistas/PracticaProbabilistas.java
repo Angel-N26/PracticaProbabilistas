@@ -1,58 +1,60 @@
 package practicaprobabilistas;
 
+import utilidades.leer;
+
 /**
  * @author Angel Loro, Angel Sánchez
  **/
 
 public class PracticaProbabilistas {
     
-    double radio;
-    double intervaloConf [];
+    private double radio;
+    private double xP;
+    private double yP;
+    private double zP;
+    private double intervaloConf [];
     
-    public PracticaProbabilistas() {
+    public PracticaProbabilistas() { //Apartado A
         
     }
     
-    public PracticaProbabilistas(double radio) {
+    public PracticaProbabilistas(double radio, double x, double y, double z) { //Apartado B
         this.radio = radio;
+        this.xP = x;
+        this.yP = y;
+        this.zP = z;
     } 
     
     public double getIntConfPos(int n){
         return intervaloConf[n];
     }
     
-    public double volumen(int k) { //area probabilista lanzando k puntos A = casos favorables / casos posibles         
-        double[] values = new double[k];         
-        double suma = 0.0;
+    public double volumen(int k) {         
+        double[] valores = new double[k];         
+        double suma = 0.0 , aux;
         for (int i = 0; i < k; i++) {
             double x = Math.random();
             double y = Math.random();
-            double z = f(x,y);            
-            suma += (3.14/4)*z; // Area de la Base por la altura // 1/4 del area de la circunferencia, 4pi/4
-            values[i] = (3.14/4)*z;
+            double z = f(x,y); 
+            aux = (3.14/4)*z; //Base por altura. 1/4 del area de la circunferencia, 4pi/4
+            suma += aux; 
+            valores[i] = aux;
         }               
-        intervaloConf = IntervaloConfProporciones(values);        
+        intervaloConf = IntervaloConfProporciones(valores);        
         return suma / k; //Teorema de la media
     }
     
     public double volumenEsfera(int k) {
-        double dentro = 0, fuera = 0;        
-        double vol_prisma;
+        double dentro = 0;                
         for(int i = 0 ; i < k ; i++){                
             double x = Math.random() * radio;
             double y = Math.random() * radio;
-            double z = Math.random() * radio;
-            // Si el punto esta dentro de la esfera, se incrementa el contador
-            if ((x * x + y * y + z * z) <= radio * radio) {
+            double z = Math.random() * radio;            
+            if ((Math.pow(x, xP) + Math.pow(y, yP) + Math.pow(z, zP)) <= radio * radio) { //Comprueba si esta dentro
                 dentro++;
-            } else {
-                fuera++;
-            }            
-        }         
-        // V = AreaBase * Altura (Siendo la altura el diametro: 2r)
-        vol_prisma = Math.pow(radio, 3);
-        // Resultado = (Numero de puntos dentro / puntos totales) * volumen del prisma que lo contiene               
-        return 8 * ((dentro / (dentro + fuera)) * vol_prisma); // Se multiplica por 8 para tener en cuenta la esfera completa.
+            }           
+        }                                 
+        return 8 * ((dentro / k) * Math.pow(radio, 3)); // Resultado = 8* ((puntos dentro / puntos totales) * volumen del prisma) // 8 = esfera completa
     }
     
     public double f(double x, double y) {
