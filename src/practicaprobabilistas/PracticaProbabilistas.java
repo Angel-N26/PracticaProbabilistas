@@ -58,7 +58,7 @@ public class PracticaProbabilistas {
             }
         }
         intervaloConf = IntervaloConfProporcionesB(dentro/k, k);
-        return 8 * ((dentro / k) * Math.pow(radio, 3)); // Resultado = 8* ((puntos dentro / puntos totales) * volumen del prisma) // 8 = esfera completa
+        return 8 * ((dentro / k) * radio*radio*radio); // Resultado = 8* ((puntos dentro / puntos totales) * volumen del prisma) // 8 = esfera completa
     }
 
     public double[] IntervaloConfProporciones(double[] valores, int n) {
